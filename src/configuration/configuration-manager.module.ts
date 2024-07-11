@@ -7,10 +7,10 @@ import { getLocalConfig } from './configuration-manager.utils';
 
 export async function loadConfig(): Promise<Configuration> {
   // Local config
-    return getLocalConfig();
+  return getLocalConfig();
 }
 
-const configProvider = {
+export const configProvider = {
   provide: 'CONFIG',
   useFactory: () => loadConfig(),
 };
@@ -19,4 +19,4 @@ const configProvider = {
   providers: [configProvider, ConfigurationManager],
   exports: [ConfigurationManager],
 })
-export class ConfigManagerModule {}
+export class ConfigManagerModule { }
