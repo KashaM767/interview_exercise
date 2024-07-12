@@ -5,7 +5,7 @@ import { MessageData } from './message.data';
 import { ChatMessageModel, ChatMessageSchema } from './models/message.model';
 
 import { ConfigManagerModule } from '../configuration/configuration-manager.module';
-import {getTestConfiguration}  from '../configuration/configuration-manager.utils';
+import { getTestConfiguration } from '../configuration/configuration-manager.utils';
 
 const id = new ObjectID('5fe0cce861c8ea54018385af');
 const conversationId = new ObjectID();
@@ -78,6 +78,30 @@ describe('MessageData', () => {
           deleted: false,
           reactions: [],
           text: 'Hello world',
+          senderId: senderId,
+          conversationId: conversationId,
+          conversation: { id: conversationId.toHexString() },
+          likesCount: 0,
+          sender: { id: senderId.toHexString() },
+        }
+      );
+    });
+
+    xit('successfully creates a message with tag', async () => {
+      const conversationId = new ObjectID();
+      const message = await messageData.create(
+        { conversationId, text: 'add tag', tag: 'intro' },
+        senderId,
+      );
+
+      expect(message).toMatchObject(
+        {
+          likes: [],
+          resolved: false,
+          deleted: false,
+          reactions: [],
+          text: 'add tag',
+          tag: 'intro',
           senderId: senderId,
           conversationId: conversationId,
           conversation: { id: conversationId.toHexString() },

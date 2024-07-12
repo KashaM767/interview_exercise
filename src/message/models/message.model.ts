@@ -122,6 +122,9 @@ export class ChatMessageModel {
   @Prop()
   text: string;
 
+  @Prop()
+  tag?: string;
+
   @Prop({ required: true, type: () => Date })
   created: Date;
 
